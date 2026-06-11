@@ -38,6 +38,10 @@ class Preparation(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))
 
 @recipe_app.route('/')
+def welcome():
+    return render_template('welcome.html')
+
+@recipe_app.route('/recipes')
 def home():
     recipes = Recipe.query.all()
     return render_template('index.html', recipes=recipes)

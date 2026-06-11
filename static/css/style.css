@@ -1,1 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+.welcome-body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-image: url("/static/images/welcome_screen.png");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
