@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rezepte</title>
+</head>
+<body>
+
+    <p>{{ recipe.name }}</p>
+
+    <p>{{ recipe.description }}</p>
+
+    <img src="{{ url_for('static', filename='images/recipes/' + recipe.image) }}"
+         alt="{{ recipe.name }}"
+         width="300">
+
+    <p>Vorbereitungszeit: {{ recipe.preparation_time }} Minuten</p>
+
+    <p>Portionen: {{ recipe.portions }}</p>
+
+    <p>Schwierigkeitsgrad: {{ recipe.difficulty }}</p>
+
+    <h2>Zutaten:</h2>
+
+    <ul>
+        {% for ingredient in ingredients %}
+            <li>
+                {{ ingredient.quantity }}
+                {{ ingredient.measurement_unit }}
+                {{ ingredient.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Zubereitungsschritte:</h2>
+
+    <ol>
+        {% for step in steps %}
+            <li>{{ step.description }}</li>
+        {% endfor %}
+    </ol>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rezepte</title>
+</head>
+<body>
+    <h1>Alle Rezepte</h1>
+    {% for recipe in recipes %}
+        <p>{{ recipe.name }}</p>
+    {% endfor %}
+</body>
+</html>

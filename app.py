@@ -1,7 +1,7 @@
-# Datei: app.py
-# Autor: Teodora Stokic
-# Datum: 05.06.2026
-# Inhalt: Flask Routen und Datenbankmodelle für die Rezeptwebseite
+# File: app.py
+# Author: Teodora Stokic
+# Date: 05.06.2026
+# Content: Flask routes and database models for the recipe website
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -20,15 +20,15 @@ class Recipe(db.Model):
     description = db.Column(db.String(500), nullable=False)
     image = db.Column(db.String(200))
     preparation_time = db.Column(db.Integer, nullable=False)
-    portions = db.Column(db.Integer, nullable=False, default=4)
+    portions = db.Column(db.Integer, nullable=False)
     difficulty = db.Column(db.String(50), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    quantity = db.Column(db.Float, nullable=False)
-    measurement_unit = db.Column(db.String(50), nullable=False)
+    quantity = db.Column(db.Float)
+    measurement_unit = db.Column(db.String(50))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))
 
 class Preparation(db.Model):
