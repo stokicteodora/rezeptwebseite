@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <title>Rezept erstellen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/create.js') }}" defer></script>
+  </head>
+
+  <body class="create-body">
+    <form method="POST" action="/recipe/create" enctype="multipart/form-data">
+        
+      <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Beschreibung</label>
+        <textarea name="description" required></textarea>
+
+        <label>Bild</label>
+        <input type="file" name="image" accept="image/*">
+
+       <label>Vorbereitungszeit (Minuten)</label>
+        <input type="number" name="preparation_time" required>
+
+        <label>Portionen</label>
+        <input type="number" name="portions" required>
+
+        <label>Schwierigkeitsgrad</label>
+        <select name="difficulty">
+            <option value="Einfach">Einfach</option>
+            <option value="Mittel">Mittel</option>
+            <option value="Schwierig">Schwierig</option>
+        </select>
+
+        <label>Kategorie</label>
+        <select name="category_id">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Zutaten</label>
+        <div id="ingredients">
+          <div class="ingredient-row">
+            <input type="text" name="ingredient_name[]" placeholder="Name">
+            <input type="number" name="ingredient_quantity[]" placeholder="Menge">
+            <input type="text" name="ingredient_unit[]" placeholder="Einheit (g, ml, EL...)">
+          </div>
+        </div>
+        <button type="button" onclick="addIngredient()">+ Zutat hinzufügen</button>
+
+      <label>Zubereitungsschritte</label>
+      <div id="steps">
+        <div class="step-row">
+          <textarea name="step_description[]" placeholder="Schritt 1"></textarea>
+        </div>
+      </div>
+      <button type="button" onclick="addStep()">+ Schritt hinzufügen</button>
+
+      <button type="submit">Rezept erstellen</button>
+
+    </form>
+  </body>
+</html>

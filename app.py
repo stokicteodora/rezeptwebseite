@@ -5,6 +5,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 recipe_app  = Flask(__name__)
 recipe_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rezepte.db'
@@ -23,6 +24,7 @@ class Recipe(db.Model):
     portions = db.Column(db.Integer, nullable=False)
     difficulty = db.Column(db.String(50), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.relationship('Category', backref='recipes') 
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,19 +58,51 @@ def recipe_detail(id):
 @recipe_app.route('/recipe/create', methods=['GET', 'POST'])
 def create_recipe():
     if request.method == 'POST':
+        image = request.files['image']
+        image_filename = image.filename
+        image.save(os.path.join('static/images/recipes', image_filename))
         recipe = Recipe(
-            name=request.form['name'],
-            description=request.form['description'],
-            image=request.form['image'],
+            name=request.form['name'],     
             preparation_time=request.form['preparation_time'],
+            description=request.form['description'],
             portions=request.form['portions'],
             difficulty=request.form['difficulty'],
             category_id=request.form['category_id'],
+            image=image_filename
         )
         db.session.add(recipe)
         db.session.commit()
+        
+        names = request.form.getlist('ingredient_name[]')
+        quantities = request.form.getlist('ingredient_quantity[]')
+        units = request.form.getlist('ingredient_unit[]')
+        for i in range(len(names)):
+            if names[i]:
+                ingredient = Ingredient(
+                    name=names[i],
+                    quantity=quantities[i] if quantities[i] else None,
+                    measurement_unit=units[i] if units[i] else None,
+                    recipe_id=recipe.id
+                )
+                db.session.add(ingredient)
+
+        descriptions = request.form.getlist('step_description[]')
+        step_number = 1
+        for desc in descriptions:
+            if desc:
+                step = Preparation(
+                    step_number=step_number,
+                    description=desc,
+                    recipe_id=recipe.id
+                )
+                db.session.add(step)
+                step_number += 1
+
+        db.session.commit()
         return redirect(url_for('home'))
-    return render_template('create.html')
+
+    categories = Category.query.all()
+    return render_template('create.html', categories=categories)
 
 @recipe_app.route('/recipe/<int:id>/edit', methods=['GET', 'POST'])
 def edit_recipe(id):

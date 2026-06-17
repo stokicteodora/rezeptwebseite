@@ -1,13 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Cause:wght@100..900&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .welcome-body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-image: url("/static/images/welcome_screen.png");
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-image: url("/static/images/welcome_screen.png");
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+}
+
+.index-body {
+  min-height: 100vh;
+  background-image: url("/static/images/index.png"), url("/static/images/index-extension.png");
+  background-size: 100% auto, 100% auto;
+  background-position: top left, bottom left;
+  background-repeat: no-repeat, repeat-y;
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 70%;
+  margin: 350px auto 20px auto;
+}
+
+.recipe-card {
+  background-color: rgba(216, 200, 188, 0.6);
+  border-radius: 15px;
+  padding: 8px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.recipe-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.recipe-name {
+  font-family: 'Cause', sans-serif;
+  margin-top: 8px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: #534032;
+}
+
+.detail-body {
+  min-height: 100vh;
+  background-image: url("/static/images/detail.png"), url("/static/images/detail-extension.png");
+  background-size: 100% auto, 100% auto;
+  background-position: top left, bottom left;
+  background-repeat: no-repeat, repeat-y;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 17.19vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  z-index: 100;
+  background: transparent;
+}
+
+.detail-sidebar a,
+.detail-sidebar button {
+  text-decoration: none;
+  color: #534032;
+  font-family: 'Cause', sans-serif;
+  font-size: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.detail-page {
+  padding-top: 24.61vw;
+  padding-left: 17.19vw;
+  box-sizing: border-box;
+}
+
+.detail-right {
+  padding: 15px;
+}
+
+.detail-content {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  border-right: 2px solid #c8c0b8;
+  padding-right: 15px;
+  align-self: stretch;
+}
+
+.detail-image-box {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(216, 200, 188, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-time,
+.detail-difficulty-badge,
+.detail-portions-badge {
+  width: 140px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-family: 'Cause', sans-serif;
+  padding: 6px 0;
+  box-sizing: border-box;
+}
+
+.detail-time { background-color: rgba(216, 200, 188, 0.5); color: #534032; }
+.detail-difficulty-badge { background-color: rgba(216, 166, 128, 0.6); color: #534032; }
+.detail-portions-badge { background-color: #534032; color: white; }
+
+.detail-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-title-box {
+  font-family: 'Cause', sans-serif;
+  background-color: rgba(216, 200, 188, 0.4);
+  border-radius: 15px;
+  padding: 10px 20px;
+  color: #534032;
+}
+
+.detail-title-box h1 { font-size: 1.4rem; color: #534032; }
+
+.detail-category-badge {
+  background-color: #c4a882;
+  padding: 4px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: white;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.detail-description-box {
+  font-family: 'Cause', sans-serif;
+  background-color: rgba(255, 248, 242, 0.8);
+  border-radius: 15px;
+  padding: 15px 20px;
+  color: #534032;
+  font-size: 0.9rem;
+  min-height: 80px;
+}
+
+.detail-bottom {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.detail-ingredients,
+.detail-steps {
+  font-family: 'Cause', sans-serif;
+  flex: 1;
+  border-radius: 15px;
+  padding: 15px;
+  color: #534032;
+  font-size: 0.85rem;
+  min-height: 200px;
+}
+
+.detail-ingredients { background-color: rgba(180, 200, 170, 0.3); }
+.detail-steps { background-color: rgba(216, 200, 188, 0.3); }
+
+.detail-ingredients h2,
+.detail-steps h2 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #534032;
+}
+
+.detail-ingredients ul,
+.detail-steps ol {
+  padding-left: 18px;
+  line-height: 1.7;
 }

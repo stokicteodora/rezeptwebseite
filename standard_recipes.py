@@ -286,7 +286,7 @@ with recipe_app.app_context():
 
         ingredients = [
             Ingredient(name='Hähnchenbrust, in dünne Streifen geschnitten', quantity=100, measurement_unit='g', recipe_id=recipe.id),
-            Ingredient(name='Spagheƫ-Nudeln, gekocht ', quantity=75, measurement_unit='g', recipe_id=recipe.id),
+            Ingredient(name='Spaghetti-Nudeln, gekocht ', quantity=75, measurement_unit='g', recipe_id=recipe.id),
             Ingredient(name='Zwiebel, fein gehackt', quantity=0.5, recipe_id=recipe.id),
             Ingredient(name='Knoblauchzehe, fein gehackt', quantity=0.5, recipe_id=recipe.id),
             Ingredient(name='Paprikaschote, entkernt und längs in dünne Streifen geschnitten', quantity=1,recipe_id=recipe.id),
