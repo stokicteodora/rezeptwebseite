@@ -268,7 +268,7 @@ html, body {
   justify-content: center;
   gap: 30px;
 
-  margin-top: 280px;
+  margin-top: 390px;
   margin-bottom: -250px;
 }
 
@@ -303,4 +303,43 @@ html, body {
 
 .all {
   background-color: #a8a8a8;
+}
+
+.search-bar {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.search-bar input {
+  padding: 10px 60px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(216, 200, 188, 0.6);
+  font-family: 'Cause', sans-serif;
+  color: #534032;
+  font-size: 1rem;
+  width: 250px;
+  outline: none;
+}
+
+.create-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.create-button a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #534032;
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+  font-family: 'Cause', sans-serif;
 }
