@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <title>{{ recipe.name }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/detail.js') }}" defer></script>
 </head>
 <body class="detail-body">
 
   <div class="detail-sidebar">
+    <a href="{{ url_for('home') }}">Startseite</a>
     <a href="{{ url_for('edit_recipe', id=recipe.id) }}">Bearbeiten</a>
-    <a href="#" onclick="document.getElementById('delete-form').submit(); return false;">Löschen</a>
+    {% if not recipe.is_default %}
+    <a href="#" id="delete-button">Löschen</a>
+    {% endif %}
   </div>
-  <form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}"></form>
-
+<form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}" style="display:none"></form>
   <div class="detail-page">
     <div class="detail-right">
       <div class="detail-content">
@@ -31,7 +34,7 @@
         <div class="detail-main">
           <div class="detail-title-box">
             <h1>{{ recipe.name }}</h1>
-            <span class="detail-category-badge">{{ recipe.category }}</span>
+            <span class="detail-category-badge">{{ recipe.category.name }}</span>
           </div>
           <div class="detail-description-box">
             <p>{{ recipe.description }}</p>

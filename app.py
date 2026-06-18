@@ -25,6 +25,7 @@ class Recipe(db.Model):
     difficulty = db.Column(db.String(50), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', backref='recipes') 
+    is_default = db.Column(db.Boolean, default=False, nullable=False)
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -134,6 +135,8 @@ def edit_recipe(id):
 @recipe_app.route('/recipe/<int:id>/delete', methods=['POST'])
 def delete_recipe(id):
     recipe = Recipe.query.get(id)
+    if recipe.is_default:
+        return redirect(url_for('home'))
     Ingredient.query.filter_by(recipe_id=id).delete()
     Preparation.query.filter_by(recipe_id=id).delete()
     db.session.delete(recipe)
