@@ -47,12 +47,22 @@ def welcome():
 @recipe_app.route('/recipes')
 def home():
     category_id = request.args.get('category_id', type=int)
+    search = request.args.get('search', '').strip()
+    
+    query = Recipe.query
     if category_id:
-        recipes = Recipe.query.filter_by(category_id=category_id).all()
-    else:
-        recipes = Recipe.query.all()
+        query = query.filter_by(category_id=category_id)
+    if search:
+        query = query.join(Ingredient).filter(
+            db.or_(
+                Recipe.name.ilike(f'%{search}%'),
+                Ingredient.name.ilike(f'%{search}%')
+            )
+        ).distinct()
+    
+    recipes = query.all()
     categories = Category.query.all()
-    return render_template('index.html', recipes=recipes, categories=categories, selected_category=category_id)
+    return render_template('index.html', recipes=recipes, categories=categories, selected_category=category_id, search=search)
 
 @recipe_app.route('/recipe/<int:id>')
 def recipe_detail(id):
