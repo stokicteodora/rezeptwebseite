@@ -20,7 +20,8 @@ with recipe_app.app_context():
             preparation_time=130,
             portions=4,
             difficulty='Einfach',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -58,7 +59,8 @@ with recipe_app.app_context():
             preparation_time=100,
             portions=5,
             difficulty='Mittel',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -97,7 +99,8 @@ with recipe_app.app_context():
             preparation_time=120,
             portions=6,
             difficulty='Schwierig',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -143,7 +146,8 @@ with recipe_app.app_context():
             preparation_time=180,
             portions=6,
             difficulty='Schwierig',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -188,7 +192,8 @@ with recipe_app.app_context():
             preparation_time=40,
             portions=2,
             difficulty='Einfach',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -233,7 +238,8 @@ with recipe_app.app_context():
             preparation_time=40,
             portions=2,
             difficulty='Einfach',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -279,7 +285,8 @@ with recipe_app.app_context():
             preparation_time=65,
             portions=2,
             difficulty='Mittel',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -324,7 +331,8 @@ with recipe_app.app_context():
             preparation_time=30,
             portions=1,
             difficulty='Einfach',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
         )
         db.session.add(recipe)
         db.session.commit()
@@ -362,7 +370,8 @@ with recipe_app.app_context():
             preparation_time=80,
             portions=5,
             difficulty='Einfach',
-            category_id=category.id
+            category_id=category.id,
+            is_default=True
             )
         db.session.add(recipe)
         db.session.commit()
@@ -397,7 +406,8 @@ with recipe_app.app_context():
               preparation_time=120,
               portions=5,
               difficulty='Einfach',
-              category_id=category.id
+              category_id=category.id,
+              is_default=True
               )
         db.session.add(recipe)
         db.session.commit()
