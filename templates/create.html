@@ -1,64 +1,82 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8">
-    <title>Rezept erstellen</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/create.js') }}" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Rezept erstellen</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/create.js') }}" defer></script>
+</head>
 
-  <body class="create-body">
-    <form method="POST" action="/recipe/create" enctype="multipart/form-data">
-        
-      <label>Name</label>
-        <input type="text" name="name" required>
+<body class="detail-body">
+  <div class="detail-sidebar">
+    <a href="{{ url_for('home') }}">Startseite</a>
+  </div>
 
-        <label>Beschreibung</label>
-        <textarea name="description" required></textarea>
+  <div class="detail-page">
+    <div class="detail-main">
+      <div class="detail-title-box">
+        <h1>Neues Rezept erstellen</h1>
+      </div>
 
-        <label>Bild</label>
-        <input type="file" name="image" accept="image/*">
+      <div class="detail-description-box">
+        <form method="POST" action="/recipe/create" enctype="multipart/form-data">
+          <label>Name</label>
+          <input type="text" name="name" required>
 
-       <label>Vorbereitungszeit (Minuten)</label>
-        <input type="number" name="preparation_time" required>
+          <label>Beschreibung</label>
+          <textarea name="description" required></textarea>
 
-        <label>Portionen</label>
-        <input type="number" name="portions" required>
+          <label>Bild</label>
+          <input type="file" name="image" accept="image/*">
 
-        <label>Schwierigkeitsgrad</label>
-        <select name="difficulty">
+          <label>Vorbereitungszeit (Minuten)</label>
+          <input type="number" name="preparation_time" required>
+
+          <label>Portionen</label>
+          <input type="number" name="portions" required>
+
+          <label>Schwierigkeitsgrad</label>
+          <select name="difficulty">
             <option value="Einfach">Einfach</option>
             <option value="Mittel">Mittel</option>
             <option value="Schwierig">Schwierig</option>
-        </select>
+          </select>
 
-        <label>Kategorie</label>
-        <select name="category_id">
+          <label>Kategorie</label>
+          <select name="category_id">
             {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
+              <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
-        </select>
+          </select>
 
-        <label>Zutaten</label>
-        <div id="ingredients">
-          <div class="ingredient-row">
-            <input type="text" name="ingredient_name[]" placeholder="Name">
-            <input type="number" name="ingredient_quantity[]" placeholder="Menge">
-            <input type="text" name="ingredient_unit[]" placeholder="Einheit (g, ml, EL...)">
+          <h2>Zutaten</h2>
+          <div id="ingredients">
+            <div class="ingredient-row">
+              <input type="text" name="ingredient_name[]" placeholder="Name">
+              <input type="number" name="ingredient_quantity[]" placeholder="Menge">
+              <input type="text" name="ingredient_unit[]" placeholder="Einheit (g, ml, EL...)">
+            </div>
           </div>
-        </div>
-        <button type="button" onclick="addIngredient()">+ Zutat hinzufügen</button>
+          <button type="button" onclick="addIngredient()">+ Zutat hinzufügen</button>
+          <h2>Zubereitungsschritte</h2>
+          <div id="steps">
+            <div class="step-row">
+              <textarea name="step_description[]" placeholder="Schritt 1"></textarea>
+            </div>
+          </div>
 
-      <label>Zubereitungsschritte</label>
-      <div id="steps">
-        <div class="step-row">
-          <textarea name="step_description[]" placeholder="Schritt 1"></textarea>
-        </div>
+          <button type="button" onclick="addStep()">
+            + Schritt hinzufügen
+          </button>
+          <br>
+          <button type="submit">
+            Rezept erstellen
+          </button>
+
+        </form>
       </div>
-      <button type="button" onclick="addStep()">+ Schritt hinzufügen</button>
+    </div>
+  </div>
 
-      <button type="submit">Rezept erstellen</button>
-
-    </form>
-  </body>
+</body>
 </html>

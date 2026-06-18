@@ -15,7 +15,7 @@
     <a href="#" id="delete-button">Löschen</a>
     {% endif %}
   </div>
-<form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}" style="display:none"></form>
+<form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}"></form>
   <div class="detail-page">
     <div class="detail-right">
       <div class="detail-content">

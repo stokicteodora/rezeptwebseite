@@ -230,3 +230,35 @@ html, body {
   padding-left: 18px;
   line-height: 1.7;
 }
+.detail-description-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-description-box input,
+.detail-description-box textarea,
+.detail-description-box select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #d5cfc9;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.detail-description-box button {
+    width: fit-content;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.ingredient-row,
+.step-row {
+    display: flex;
+    gap: 10px;
+}
+
+.ingredient-row input {
+    flex: 1;
+}
