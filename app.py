@@ -46,8 +46,13 @@ def welcome():
 
 @recipe_app.route('/recipes')
 def home():
-    recipes = Recipe.query.all()
-    return render_template('index.html', recipes=recipes)
+    category_id = request.args.get('category_id', type=int)
+    if category_id:
+        recipes = Recipe.query.filter_by(category_id=category_id).all()
+    else:
+        recipes = Recipe.query.all()
+    categories = Category.query.all()
+    return render_template('index.html', recipes=recipes, categories=categories, selected_category=category_id)
 
 @recipe_app.route('/recipe/<int:id>')
 def recipe_detail(id):
@@ -114,7 +119,10 @@ def edit_recipe(id):
 
         recipe.name = request.form['name']
         recipe.description = request.form['description']
-        recipe.image = request.form['image']
+        image = request.files.get('image')
+        if image and image.filename:
+          image.save(os.path.join('static/images/recipes', image.filename))
+          recipe.image = image.filename
         recipe.preparation_time = request.form['preparation_time']
         recipe.portions = request.form['portions']
         recipe.difficulty = request.form['difficulty']
@@ -130,13 +138,12 @@ def edit_recipe(id):
 
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('edit.html', recipe=recipe, ingredients=ingredients, steps=steps)
-
+    categories = Category.query.all()
+    return render_template('edit.html', recipe=recipe, ingredients=ingredients, steps=steps, categories=categories)
+ 
 @recipe_app.route('/recipe/<int:id>/delete', methods=['POST'])
 def delete_recipe(id):
     recipe = Recipe.query.get(id)
-    if recipe.is_default:
-        return redirect(url_for('home'))
     Ingredient.query.filter_by(recipe_id=id).delete()
     Preparation.query.filter_by(recipe_id=id).delete()
     db.session.delete(recipe)
