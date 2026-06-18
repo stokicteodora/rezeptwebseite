@@ -6,13 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body class="index-body">
-    <div class="recipe-grid">
-      {% for recipe in recipes %}
-        <a href="{{ url_for('recipe_detail', id=recipe.id) }}" class="recipe-card">
-          <img src="{{ url_for('static', filename='images/recipes/' + recipe.image) }}" class="recipe-image">
-          <p class="recipe-name">{{ recipe.name }}</p>
+    <div class="category-filter">
+      <a href="{{ url_for('home') }}" class="category-badge all">Alle</a>
+      {% for category in categories %}
+      <a href="{{ url_for('home', category_id=category.id) }}"
+        class="category-badge {% if category.name == 'Vorspeise' %}appetizer{% elif category.name == 'Hauptgericht' %}main{% elif category.name == 'Dessert' %}dessert{% endif %}">
+        {{ category.name }}
       </a>
       {% endfor %}
     </div>
-</body>
+    <div class="recipe-grid">
+      {% for recipe in recipes %}
+      <a href="{{ url_for('recipe_detail', id=recipe.id) }}" class="recipe-card">
+        <img src="{{ url_for('static', filename='images/recipes/' + recipe.image) }}" class="recipe-image">
+        <p class="recipe-name">{{ recipe.name }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </body>
 </html>

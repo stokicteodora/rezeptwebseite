@@ -362,7 +362,10 @@ with recipe_app.app_context():
         db.session.commit()
 
         # Recipe 9
-        category = Category.query.filter_by(name='Hauptgericht').first()
+        category = Category(name='Vorspeise')
+        db.session.add(category)
+        db.session.commit()
+
         recipe = Recipe(
             name='Pol Roti',
             description='Pol Roti, was übersetzt "Kokosnuss-Fladenbrot" bedeutet, ist eine traditionelle Spezialität aus Sri Lanka, die zu jeder Mahlzeit genossen wird. Ihren Ursprung hat sie in der einfachen Dorfküche, wo aus regionalen Zutaten wie Getreide und Reis frühe Formen von Fladenbrot entstanden. Mit der Verbreitung der Kokospalme entlang der Küsten wurde frisch geriebene Kokosnuss zu einem festen Bestandteil des Teigs und verlieh dem Brot seinen typischen Geschmack. Pol Roti wird oft mit Currys, Chutneys oder dem beliebten Kokos-Sambal serviert.',

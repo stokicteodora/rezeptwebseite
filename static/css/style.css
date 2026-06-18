@@ -262,3 +262,45 @@ html, body {
 .ingredient-row input {
     flex: 1;
 }
+
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  margin-top: 280px;
+  margin-bottom: -250px;
+}
+
+.category-badge {
+  width: 140px;
+  height: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 30px;
+  text-decoration: none;
+
+  font-family: 'Cause', sans-serif;
+  font-size: 1rem;
+
+  color: white;
+}
+
+.appetizer {
+  background-color: #c1ccbc;
+}
+
+.main {
+  background-color: #c7ab82;
+}
+
+.dessert {
+  background-color: #ddbfa9;
+}
+
+.all {
+  background-color: #a8a8a8;
+}
