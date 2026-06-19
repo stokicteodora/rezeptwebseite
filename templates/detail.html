@@ -5,6 +5,7 @@
   <title>{{ recipe.name }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <script src="{{ url_for('static', filename='js/detail.js') }}" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body class="detail-body">
 
@@ -37,6 +38,7 @@
           <div class="detail-title-box">
             <h1>{{ recipe.name }}</h1>
             <span class="detail-category-badge">{{ recipe.category.name }}</span>
+            <i id="heart-button" class="fa-solid fa-heart" data-recipe-id="{{ recipe.id }}"></i>
           </div>
           <div class="detail-description-box">
             <p>{{ recipe.description }}</p>

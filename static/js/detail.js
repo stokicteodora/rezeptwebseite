@@ -9,3 +9,18 @@ if (deletebutton) {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const heart = document.getElementById("heart-button");
+  const recipeId = heart.dataset.recipeId;
+  const key = `heart-${recipeId}`;
+
+  if (localStorage.getItem(key) === "true") {
+    heart.classList.add("active");
+  }
+
+  heart.addEventListener("click", () => {
+    heart.classList.toggle("active");
+    localStorage.setItem(key, heart.classList.contains("active"));
+  });
+});
