@@ -305,6 +305,13 @@ html, body {
   background-color: #a8a8a8;
 }
 
+.category-badge.favorites-btn {
+  background: #534032;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .search-bar {
   position: absolute;
   top: 160px;
