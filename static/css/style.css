@@ -359,3 +359,18 @@ html, body {
 #heart-button.active {
   color: rgb(205, 161, 161);
 }
+
+.detail-stars {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.detail-stars i {
+  color: rgba(194, 195, 196, 0.6);
+  font-size: 1.2rem;
+}
+
+.fa-star.active {
+  color: rgb(254, 236, 134);
+}
