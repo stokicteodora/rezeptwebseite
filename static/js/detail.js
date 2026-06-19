@@ -35,3 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+const portionsInput = document.getElementById("portions-input");
+const basePortions = parseInt(portionsInput.defaultValue);
+
+portionsInput.addEventListener("input", () => {
+  const factor = portionsInput.value / basePortions;
+  document.querySelectorAll(".ingredient-quantity").forEach((el) => {
+    const base = parseFloat(el.dataset.base);
+    if (!isNaN(base)) el.textContent = Math.round(base * factor * 100) / 100;
+  });
+});

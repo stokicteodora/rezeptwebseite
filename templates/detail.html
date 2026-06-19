@@ -53,10 +53,13 @@
           <div class="detail-bottom">
             <div class="detail-ingredients">
               <h2>Zutaten</h2>
+              <label>Portionen: <input type="number" id="portions-input" value="{{ recipe.portions }}" min="1"></label>
               <ul>
                 {% for ingredient in ingredients %}
                   <li>
-                    {% if ingredient.quantity %}{{ ingredient.quantity }}{% endif %}
+                    <span class="ingredient-quantity" data-base="{{ ingredient.quantity }}">
+                      {% if ingredient.quantity %}{{ ingredient.quantity }}{% endif %}
+                    </span>
                     {% if ingredient.measurement_unit %}{{ ingredient.measurement_unit }}{% endif %}
                     {{ ingredient.name }}
                   </li>
