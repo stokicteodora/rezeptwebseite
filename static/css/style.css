@@ -343,3 +343,19 @@ html, body {
   font-size: 2rem;
   font-family: 'Cause', sans-serif;
 }
+
+#heart-button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.15s ease;
+  color: rgba(194, 195, 196, 0.6);
+  margin-left: 10px;
+}
+
+#heart-button:hover {
+  transform: scale(1.1);
+}
+
+#heart-button.active {
+  color: rgb(205, 161, 161);
+}
