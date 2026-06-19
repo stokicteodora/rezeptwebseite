@@ -13,6 +13,7 @@
     </div>
     <div class="category-filter">
       <a href="{{ url_for('home') }}" class="category-badge all">Alle</a>
+      <a href="#" class="category-badge favorites-btn" id="liked-filter">Gemerkt</a>
       {% for category in categories %}
       <a href="{{ url_for('home', category_id=category.id) }}"
         class="category-badge {% if category.name == 'Vorspeise' %}appetizer{% elif category.name == 'Hauptgericht' %}main{% elif category.name == 'Dessert' %}dessert{% endif %}">
