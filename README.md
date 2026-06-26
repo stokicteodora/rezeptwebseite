@@ -56,7 +56,7 @@ Hinweis: Alle in diesem Projekt verwendeten Rezeptbilder wurden von mir persönl
 
 ## Projektstruktur
 
-![Projektstruktur](static/images/project_structure.png)
+![Projektstruktur](static/images/project-structure.png)
 
 ---
 
