@@ -1,3 +1,12 @@
+/*
+File: style.css
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Main stylesheet for the recipe web application.
+Defines layout, colors, typography, and responsive UI styling
+for all pages (welcome, index, detail, create, edit).
+*/
 @import url('https://fonts.googleapis.com/css2?family=Cause:wght@100..900&display=swap');
 
 html, body {
@@ -6,6 +15,7 @@ html, body {
   overflow-x: hidden;
 }
 
+/* --- Welcome page --- */
 .welcome-body {
   height: 100vh;
   display: flex;
@@ -20,6 +30,7 @@ html, body {
   padding: 0;
 }
 
+/* --- Index page --- */
 .index-body {
   min-height: 100vh;
   background-image: url("/static/images/index.png"), url("/static/images/index-extension.png");
@@ -67,6 +78,7 @@ html, body {
   color: #534032;
 }
 
+/* --- Detail page --- */
 .detail-body {
   min-height: 100vh;
   background-image: url("/static/images/detail.png"), url("/static/images/detail-extension.png");
@@ -120,6 +132,7 @@ html, body {
   align-items: flex-start;
 }
 
+/* Left column: image, badges, stars */
 .detail-left {
   display: flex;
   flex-direction: column;
@@ -161,6 +174,7 @@ html, body {
 .detail-difficulty-badge { background-color: rgba(216, 166, 128, 0.6); color: #534032; }
 .detail-portions-badge { background-color: #534032; color: white; }
 
+/* Right column: title, description, ingredients, steps */
 .detail-main {
   flex: 1;
   display: flex;
@@ -230,6 +244,8 @@ html, body {
   padding-left: 18px;
   line-height: 1.7;
 }
+
+/* --- Create and edit forms --- */
 .detail-description-box form {
     display: flex;
     flex-direction: column;
@@ -263,6 +279,7 @@ html, body {
     flex: 1;
 }
 
+/* --- Category filter --- */
 .category-filter {
   display: flex;
   justify-content: center;
@@ -312,6 +329,7 @@ html, body {
   cursor: pointer;
 }
 
+/* --- Search bar --- */
 .search-bar {
   position: absolute;
   top: 160px;
@@ -331,6 +349,7 @@ html, body {
   outline: none;
 }
 
+/* --- Create button (fixed bottom right) --- */
 .create-button {
   position: fixed;
   bottom: 30px;
@@ -351,6 +370,7 @@ html, body {
   font-family: 'Cause', sans-serif;
 }
 
+/* Heart button */
 #heart-button {
   cursor: pointer;
   font-size: 1.5rem;
@@ -367,6 +387,7 @@ html, body {
   color: rgb(205, 161, 161);
 }
 
+/* Star rating */
 .detail-stars {
   display: flex;
   flex-direction: row;

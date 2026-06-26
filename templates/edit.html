@@ -1,3 +1,11 @@
+<!--
+File: edit.html
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Recipe edit page. Allows users to modify existing recipes,
+including name, description, image, ingredients, and preparation steps.
+-->
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -9,6 +17,7 @@
   </head>
 
   <body class="detail-body">
+    <!-- Sidebar navigation -->
     <div class="detail-sidebar">
       <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Startseite</a>
     </div>
@@ -20,13 +29,14 @@
         </div>
 
         <div class="detail-description-box">
+          <!-- edit form, enctype needed for image upload -->
           <form method="POST" action="{{ url_for('edit_recipe', id=recipe.id) }}" enctype="multipart/form-data">
             <label>Name</label>
             <input type="text" name="name" value="{{ recipe.name }}" required>
 
             <label>Beschreibung</label>
             <textarea name="description" required>{{ recipe.description }}</textarea>
-
+            <!-- Image upload is optional; current filename is shown below -->
             <label>Bild</label>
             <input type="file" name="image" accept="image/*">
             <p>Aktuell: {{ recipe.image }}</p>
@@ -47,6 +57,7 @@
             <label>Kategorie</label>
             <select name="category_id">
               {% for category in categories %}
+                <!-- Pre-select the category the recipe currently belongs to -->
                 <option value="{{ category.id }}" {% if category.id == recipe.category_id %}selected{% endif %}>{{ category.name }}</option>
               {% endfor %}
             </select>
@@ -54,10 +65,12 @@
             <h2>Zutaten</h2>
             <div id="ingredients">
               {% for ingredient in ingredients %}
+              <!-- Each ingredient row is identified by its database ID -->
                 <div class="ingredient-row">
                   <input type="text" name="ingredient_name_{{ ingredient.id }}" value="{{ ingredient.name }}">
-                  <input type="number" name="ingredient_quantity_{{ ingredient.id }}" value="{{ ingredient.quantity }}">
-                  <input type="text" name="ingredient_unit_{{ ingredient.id }}" value="{{ ingredient.measurement_unit }}">
+                  <!-- quantity and unit are optional, empty string shown instead of None -->
+                  <input type="number" step="any" name="ingredient_quantity_{{ ingredient.id }}" value="{{ ingredient.quantity if ingredient.quantity is not none else '' }}">
+                  <input type="text" name="ingredient_unit_{{ ingredient.id }}" value="{{ ingredient.measurement_unit if ingredient.measurement_unit is not none else '' }}">
                 </div>
               {% endfor %}
             </div>
@@ -65,6 +78,7 @@
             <h2>Zubereitungsschritte</h2>
             <div id="steps">
               {% for step in steps %}
+                <!-- Each step textarea is identified by its database ID -->
                 <div class="step-row">
                   <textarea name="step_description_{{ step.id }}">{{ step.description }}</textarea>
                 </div>

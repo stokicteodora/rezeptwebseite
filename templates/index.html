@@ -1,3 +1,12 @@
+<!--
+File: index.html
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Main recipe overview page. Displays all recipes,
+allows filtering by category and search, and links to recipe details
+and creation page.
+-->
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -6,11 +15,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
   </head>
-  
+
   <body class="index-body">
+    <!-- Search bar: current search term is kept as the input value -->
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Rezept suchen..." value="{{ search }}">
     </div>
+     <!-- Category filter: highlights the selected category, includes a favorites filter -->
     <div class="category-filter">
       <a href="{{ url_for('home') }}" class="category-badge all">Alle</a>
       <a href="#" class="category-badge favorites-btn" id="liked-filter">Gemerkt</a>
@@ -21,6 +32,7 @@
       </a>
       {% endfor %}
     </div>
+    <!-- Recipe grid: each card links to the detail page -->
     <div class="recipe-grid">
       {% for recipe in recipes %}
       <a href="{{ url_for('recipe_detail', id=recipe.id) }}" class="recipe-card">
@@ -29,6 +41,7 @@
       </a>
       {% endfor %}
     </div>
+    <!-- Button to open the recipe creation page -->
     <div class="create-button">
       <a href="{{ url_for('create_recipe') }}">+</a>
     </div>

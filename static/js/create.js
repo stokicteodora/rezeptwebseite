@@ -1,3 +1,12 @@
+//
+// File: create.js
+// Author: Teodora Stokic
+// Date: 26.06.2026
+// Version: 1.2
+// Description: Adds ingredients and steps dynamically in the recipe form.
+//
+
+// Adds a new empty ingredient row to the ingredients list
 function addIngredient() {
   const div = document.createElement("div");
   div.className = "ingredient-row";
@@ -9,6 +18,7 @@ function addIngredient() {
   document.getElementById("ingredients").appendChild(div);
 }
 
+// Adds a new empty step textarea to the steps list
 function addStep() {
   const div = document.createElement("div");
   div.className = "step-row";
