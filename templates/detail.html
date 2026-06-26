@@ -1,83 +1,96 @@
+<!--
+File: detail.html
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Recipe detail page. Displays full recipe information
+including image, ingredients, preparation steps, and allows
+edit, delete, and favorite actions.
+-->
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ recipe.name }}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <script src="{{ url_for('static', filename='js/detail.js') }}" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
-<body class="detail-body">
-
-  <div class="detail-sidebar">
-    <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Startseite</a>
-    {% if not recipe.is_default %}
-    <a href="{{ url_for('edit_recipe', id=recipe.id) }}"><i class="fa-solid fa-pen"></i> Bearbeiten</a>
-    {% endif %}
-    {% if not recipe.is_default %}
-    <a href="#" id="delete-button"><i class="fa-solid fa-trash"></i> Löschen</a>
-    {% endif %}
-  </div>
-<form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}"></form>
-  <div class="detail-page">
-    <div class="detail-right">
-      <div class="detail-content">
-
-        <div class="detail-left">
-          <div class="detail-image-box">
-            <img src="{{ url_for('static', filename='images/recipes/' + recipe.image) }}"
-                 alt="{{ recipe.name }}"
-                 class="detail-image">
-          </div>
-          <p class="detail-time">{{ recipe.preparation_time }} Minuten</p>
-          <p class="detail-difficulty-badge">{{ recipe.difficulty }}</p>
-          <p class="detail-portions-badge">{{ recipe.portions }} Portionen</p>
-          <div class="detail-stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-        </div>
-
-        <div class="detail-main">
-          <div class="detail-title-box">
-            <h1>{{ recipe.name }}</h1>
-            <span class="detail-category-badge">{{ recipe.category.name }}</span>
-            <i id="heart-button" class="fa-solid fa-heart" data-recipe-id="{{ recipe.id }}"></i>
-          </div>
-          <div class="detail-description-box">
-            <p>{{ recipe.description }}</p>
-          </div>
-          <div class="detail-bottom">
-            <div class="detail-ingredients">
-              <h2>Zutaten</h2>
-              <label>Portionen: <input type="number" id="portions-input" value="{{ recipe.portions }}" min="1"></label>
-              <ul>
-                {% for ingredient in ingredients %}
-                  <li>
-                    <span class="ingredient-quantity" data-base="{{ ingredient.quantity }}">
-                      {% if ingredient.quantity %}{{ ingredient.quantity }}{% endif %}
-                    </span>
-                    {% if ingredient.measurement_unit %}{{ ingredient.measurement_unit }}{% endif %}
-                    {{ ingredient.name }}
-                  </li>
-                {% endfor %}
-              </ul>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/detail.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  </head>
+  <body class="detail-body">
+    <!-- Sidebar: edit and delete hidden for default recipes -->
+    <div class="detail-sidebar">
+      <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Startseite</a>
+      {% if not recipe.is_default %}
+      <a href="{{ url_for('edit_recipe', id=recipe.id) }}"><i class="fa-solid fa-pen"></i> Bearbeiten</a>
+      {% endif %}
+      {% if not recipe.is_default %}
+      <a href="#" id="delete-button"><i class="fa-solid fa-trash"></i> Löschen</a>
+      {% endif %}
+    </div>
+    <!-- Hidden delete form, submitted by detail.js on confirm -->
+    <form id="delete-form" method="POST" action="{{ url_for('delete_recipe', id=recipe.id) }}"></form>
+    <div class="detail-page">
+      <div class="detail-right">
+        <div class="detail-content">
+          <!-- Left column: image, time, difficulty, portions, star rating -->
+          <div class="detail-left">
+            <div class="detail-image-box">
+              <img src="{{ url_for('static', filename='images/recipes/' + recipe.image) }}"
+                alt="{{ recipe.name }}"
+                class="detail-image">
             </div>
-            <div class="detail-steps">
-              <h2>Zubereitung</h2>
-              <ol>
-                {% for step in steps %}
-                  <li>{{ step.description }}</li>
-                {% endfor %}
-              </ol>
+            <p class="detail-time">{{ recipe.preparation_time }} Minuten</p>
+            <p class="detail-difficulty-badge">{{ recipe.difficulty }}</p>
+            <p class="detail-portions-badge">{{ recipe.portions }} Portionen</p>
+            <div class="detail-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <!-- Right column: title, description, ingredients, steps -->
+          <div class="detail-main">
+            <div class="detail-title-box">
+              <h1>{{ recipe.name }}</h1>
+              <span class="detail-category-badge">{{ recipe.category.name }}</span>
+              <!-- Heart button state is saved in localStorage -->
+              <i id="heart-button" class="fa-solid fa-heart" data-recipe-id="{{ recipe.id }}"></i>
+            </div>
+            <div class="detail-description-box">
+              <p>{{ recipe.description }}</p>
+            </div>
+            <div class="detail-bottom">
+              <div class="detail-ingredients">
+                <h2>Zutaten</h2>
+                <!-- Changing portions scales ingredient quantities via detail.js -->
+                <label>Portionen: <input type="number" id="portions-input" value="{{ recipe.portions }}" min="1"></label>
+                <ul>
+                  {% for ingredient in ingredients %}
+                    <li>
+                      <!-- data-base stores the original quantity for scaling -->
+                      <span class="ingredient-quantity" data-base="{{ ingredient.quantity }}">
+                        {% if ingredient.quantity %}{{ ingredient.quantity }}{% endif %}
+                      </span>
+                      {% if ingredient.measurement_unit %}{{ ingredient.measurement_unit }}{% endif %}
+                      {{ ingredient.name }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="detail-steps">
+                <h2>Zubereitung</h2>
+                <ol>
+                  {% for step in steps %}
+                    <li>{{ step.description }}</li>
+                  {% endfor %}
+                </ol>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

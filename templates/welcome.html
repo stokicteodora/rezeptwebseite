@@ -1,10 +1,17 @@
+<!--
+File: welcome.html
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Welcome page of the cookbook application. Redirects user to recipe overview on click.
+-->
 <!DOCTYPE html>
 <html lang="de">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>My Cookbook</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body class="welcome-body" onclick="window.location.href='/recipes'">
-</body>
+  </head>
+  <body class="welcome-body" onclick="window.location.href='/recipes'">
+  </body>
 </html>

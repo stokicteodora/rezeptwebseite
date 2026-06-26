@@ -1,3 +1,11 @@
+<!--
+File: create.html
+Author: Teodora Stokic
+Date: 26.06.2026
+Version: 1.2
+Description: Recipe creation page. Allows users to create new recipes
+including name, description, image upload, ingredients, and steps.
+-->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -51,15 +59,18 @@
           </select>
 
           <h2>Zutaten</h2>
+          <!-- New ingredient rows are added here by create.js -->
           <div id="ingredients">
             <div class="ingredient-row">
               <input type="text" name="ingredient_name[]" placeholder="Name">
+              <!-- quantity and unit are optional -->
               <input type="number" name="ingredient_quantity[]" placeholder="Menge">
               <input type="text" name="ingredient_unit[]" placeholder="Einheit (g, ml, EL...)">
             </div>
           </div>
           <button type="button" onclick="addIngredient()">+ Zutat hinzufügen</button>
           <h2>Zubereitungsschritte</h2>
+          <!-- New step rows are added here by create.js -->
           <div id="steps">
             <div class="step-row">
               <textarea name="step_description[]" placeholder="Schritt 1"></textarea>
